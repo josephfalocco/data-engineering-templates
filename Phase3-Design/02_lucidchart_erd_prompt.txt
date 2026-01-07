@@ -1,0 +1,56 @@
+# Lucidchart AI ERD Prompt Template
+
+## How to Use
+1. Open Lucidchart → New → Templates → Search "ERD" → Select "Database ER diagram (crow's foot)"
+2. Replace all [PLACEHOLDERS] below with your project specifics
+3. Paste into the Lucid AI prompt box
+4. Adjust layout as needed after generation
+
+## Placeholder Reference
+| Placeholder | Replace With | Example |
+|-------------|--------------|---------|
+| [NUMBER] | Total table count | 4 |
+| [FACT_NAME] | Your fact table subject | sales, orders, shipments |
+| [DIMENSION_1] | First dimension | customer, product, employee |
+| [DIMENSION_2] | Second dimension | location, category, department |
+| [measure_1], [measure_2] | Numeric values to aggregate | amount, quantity, cost |
+| [attribute_1], [attribute_2] | Descriptive fields | name, type, status |
+
+---
+
+## Prompt (copy below this line)
+
+Create an ERD with [NUMBER] tables using crow's foot notation:
+
+1. fact_[FACT_NAME] (center)
+- [fact_id] (PK, varchar)
+- date_key (FK to dim_date)
+- [dimension_1]_key (FK to dim_[dimension_1])
+- [dimension_2]_key (FK to dim_[dimension_2])
+- [measure_1] (decimal)
+- [measure_2] (decimal)
+
+2. dim_date
+- date_key (PK, integer)
+- full_date (date)
+- year (integer)
+- month (integer)
+- month_name (varchar)
+- quarter (varchar)
+
+3. dim_[DIMENSION_1]
+- [dimension_1]_key (PK, integer)
+- [attribute_1] (varchar)
+- [attribute_2] (varchar)
+
+4. dim_[DIMENSION_2]
+- [dimension_2]_key (PK, integer)
+- [attribute_1] (varchar)
+- [attribute_2] (varchar)
+
+Relationships:
+- dim_date one-to-many fact_[FACT_NAME]
+- dim_[DIMENSION_1] one-to-many fact_[FACT_NAME]
+- dim_[DIMENSION_2] one-to-many fact_[FACT_NAME]
+
+Place fact_[FACT_NAME] in the center with the dimension tables around it.
